@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Adoption Center</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Custom Styling */
+        body {
+            padding-top: 56px; /* Prevent overlap with fixed navbar */
+            background-color: #f9f9f9;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #5a4635 !important;
+        }
+
+        .navbar {
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .btn-primary {
+            background-color: #5a4635;
+            border: none;
+        }
+
+        .navbar .btn-primary:hover {
+            background-color: #433329;
+        }
+
+        header {
+            background-color: #5a4635;
+            color: white;
+        }
+
+        header h1, header p {
+            color: #fff;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #5a4635;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🐾 Dog Haven</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#adopt">Adopt a Dog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                </ul>
+                {% if user %}
+                <span class="navbar-text me-3">Welcome, {{ user.full_name }}</span>
+                <a href="/login" class="btn btn-primary">Logout</a>
+                {% else %}
+                <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+                <a href="/register" class="btn btn-primary">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to Dog Haven</h1>
+            <p class="lead">Your journey to finding a loving companion starts here.</p>
+            <a href="#adopt" class="btn btn-light btn-lg mt-3">Explore Dogs</a>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-5 text-center">
+        <div class="container">
+            <h2 class="mb-4">About Us</h2>
+            <p class="text-muted">At Dog Haven, we are committed to helping abandoned and homeless dogs find their forever homes.
+                <br> Browse through our collection of adorable pups and make a difference by adopting today!</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-dog fa-3x text-primary mb-3"></i>
+                    <h3>Adopt a Dog</h3>
+                    <p>Browse through our listings to find the perfect dog for your family.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-paw fa-3x text-primary mb-3"></i>
+                    <h3>Support Us</h3>
+                    <p>Contribute to our mission by volunteering or donating to support the dogs in need.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-home fa-3x text-primary mb-3"></i>
+                    <h3>Foster Care</h3>
+                    <p>Provide a temporary home for a dog in need until it finds its forever home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dogs Section -->
+    <section id="adopt" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Adoptable Dogs</h2>
+            <div class="row">
+                {% for dog in dogs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/' + dog.image) }}" class="card-img-top" alt="{{ dog.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dog.name }}</h5>
+                            <p class="card-text">Breed: {{ dog.breed }} | Age: {{ dog.age }}</p>
+                            <a href="{{ url_for('dog_profile', dog_id=dog.id) }}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="bg-light py-5">
+        <div class="container text-center">
+            <h2>Contact Us</h2>
+            <p>Have questions? Reach out to us at <strong>contact@doghaven.com</strong> or call <strong>(123) 456-7890</strong>.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>© 2024 Dog Haven. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

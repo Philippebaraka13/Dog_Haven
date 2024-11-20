@@ -1,0 +1,61 @@
+/* General Page Styles */
+body {
+    background-color: #f9f9f9;
+}
+
+/* Card Styling */
+.card {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #5a4635;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #5a4635;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #433329;
+}
+
+/* Form Control Styling */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #5a4635;
+    box-shadow: 0 0 5px rgba(90, 70, 53, 0.5);
+}
+
+/* Link Styling */
+.text-decoration-none {
+    color: #5a4635;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.text-decoration-none:hover {
+    color: #433329;
+    text-decoration: underline;
+}

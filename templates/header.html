@@ -1,0 +1,6 @@
+{% if session['user_id'] %}
+    <a href="/logout" class="btn btn-danger">Logout</a>
+{% else %}
+    <a href="/login" class="btn btn-outline-primary">Login</a>
+    <a href="/register" class="btn btn-primary">Register</a>
+{% endif %}

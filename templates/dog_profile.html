@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dog.name }} - Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">🐾 Dog Haven</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto"></ul>
+                {% if user %}
+                <span class="navbar-text me-3">Welcome, {{ user.full_name }}</span>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Dog Profile Section -->
+    <div class="container py-5 mt-5">
+        <div class="row">
+            <!-- Dog Image -->
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename='images/' + dog.image) }}" alt="{{ dog.name }}" class="img-fluid rounded shadow">
+            </div>
+            <!-- Dog Details -->
+            <div class="col-md-6">
+                <h2>{{ dog.name }}</h2>
+                <p><strong>Breed:</strong> {{ dog.breed }}</p>
+                <p><strong>Age:</strong> {{ dog.age }}</p>
+                <p><strong>Color:</strong> {{ dog.color }}</p>
+                <div class="mt-4">
+                    <!-- Updated Adopt Button -->
+                    <form method="POST" action="/adopt/{{ dog.id }}" style="display:inline;" onsubmit="return confirmAdopt();">
+                        <button type="submit" class="btn btn-primary me-2">Adopt</button>
+                    </form>
+                    <!-- Delete Button -->
+                    <form method="POST" action="/delete/{{ dog.id }}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>© 2024 Dog Haven. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        function confirmAdopt() {
+            alert("You have successfully adopted the dog!");
+            return true; // Allow the form submission to proceed
+        }
+    </script>
+</body>
+</html>
